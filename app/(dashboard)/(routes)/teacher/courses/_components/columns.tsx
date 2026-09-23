@@ -71,8 +71,8 @@ export const columns: ColumnDef<Course>[] = [
 
       return (
         <Badge className={cn(
-          "bg-slate-500",
-          isPublished && "bg-sky-700"
+          "bg-codeup-muted",
+          isPublished && "bg-codeup-brand"
         )}>
           {isPublished ? "منشورة" : "مسودة"}
         </Badge>

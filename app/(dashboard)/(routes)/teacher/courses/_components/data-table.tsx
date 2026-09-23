@@ -71,7 +71,7 @@ export function DataTable<TData, TValue>({
           </Button>
         </Link>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-2xl border bg-codeup-surface shadow-codeup-sm overflow-hidden">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

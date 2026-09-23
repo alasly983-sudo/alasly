@@ -1,11 +1,22 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Cairo } from 'next/font/google'
+import { IBM_Plex_Sans_Arabic, Tajawal } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ToastProvider } from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers/confetti-provider'
 
-const cairo = Cairo({ subsets: ['arabic', 'latin'], display: 'swap' })
+const ibmPlex = IBM_Plex_Sans_Arabic({
+  subsets: ['arabic'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ibm-plex',
+})
+const tajawal = Tajawal({
+  subsets: ['arabic'],
+  display: 'swap',
+  weight: ['400', '500', '700', '800'],
+  variable: '--font-tajawal',
+})
 
 export const metadata: Metadata = {
   title: 'منصة تعلّم',
@@ -20,7 +31,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ar" dir="rtl">
-        <body className={cairo.className}>
+        <body className={`${ibmPlex.className} ${tajawal.variable}`}>
           <ConfettiProvider />
           <ToastProvider />
           {children}

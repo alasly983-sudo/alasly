@@ -62,7 +62,7 @@ export const PriceForm = ({
   }
 
   return (
-    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
+    <div className="mt-6 border bg-codeup-surface rounded-2xl p-5 shadow-codeup-sm">
       <div className="font-medium flex items-center justify-between">
         سعر الدورة
         <Button onClick={toggleEdit} variant="ghost">

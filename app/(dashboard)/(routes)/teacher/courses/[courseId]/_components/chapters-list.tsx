@@ -75,16 +75,16 @@ export const ChaptersList = ({
                 {(provided) => (
                   <div
                     className={cn(
-                      "flex items-center gap-x-2 bg-slate-200 border-slate-200 border text-slate-700 rounded-xl mb-4 text-sm shadow-sm",
-                      chapter.isPublished && "bg-sky-100 border-sky-200 text-sky-700"
+                      "flex items-center gap-x-2 bg-codeup-surface-2 border-codeup-canvas border text-codeup-ink rounded-xl mb-4 text-sm shadow-codeup-sm",
+                      chapter.isPublished && "bg-codeup-soft border-codeup-brand/20 text-codeup-strong"
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                   >
                     <div
                       className={cn(
-                        "px-2 py-3 border-l border-l-slate-200 hover:bg-slate-300 rounded-r-xl transition",
-                        chapter.isPublished && "border-l-sky-200 hover:bg-sky-200"
+                        "px-2 py-3 border-l border-l-codeup-canvas hover:bg-codeup-soft rounded-r-xl transition",
+                        chapter.isPublished && "border-l-codeup-brand/20 hover:bg-codeup-soft"
                       )}
                       {...provided.dragHandleProps}
                     >
@@ -101,8 +101,8 @@ export const ChaptersList = ({
                       )}
                       <Badge
                         className={cn(
-                          "bg-slate-500",
-                          chapter.isPublished && "bg-sky-700"
+                          "bg-codeup-muted",
+                          chapter.isPublished && "bg-codeup-brand"
                         )}
                       >
                         {chapter.isPublished ? "منشور" : "مسودة"}

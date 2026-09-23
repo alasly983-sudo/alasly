@@ -45,7 +45,7 @@ export const ChapterVideoForm = ({
   }
 
   return (
-    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
+    <div className="mt-6 border bg-codeup-surface rounded-2xl p-5 shadow-codeup-sm">
       <div className="font-medium flex items-center justify-between">
         فيديو الفصل
         <Button onClick={toggleEdit} variant="ghost">
@@ -68,7 +68,7 @@ export const ChapterVideoForm = ({
       </div>
       {!isEditing && (
         !initialData.videoUrl ? (
-          <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
+          <div className="flex items-center justify-center h-60 bg-codeup-soft rounded-xl">
             <Video className="h-10 w-10 text-slate-500" />
           </div>
         ) : (

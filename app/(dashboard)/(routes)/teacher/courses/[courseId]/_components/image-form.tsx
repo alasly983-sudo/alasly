@@ -45,7 +45,7 @@ export const ImageForm = ({
   }
 
   return (
-    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
+    <div className="mt-6 border bg-codeup-surface rounded-2xl p-5 shadow-codeup-sm">
       <div className="font-medium flex items-center justify-between">
         صورة الدورة
         <Button onClick={toggleEdit} variant="ghost">
@@ -68,7 +68,7 @@ export const ImageForm = ({
       </div>
       {!isEditing && (
         !initialData.imageUrl ? (
-          <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
+          <div className="flex items-center justify-center h-60 bg-codeup-soft rounded-xl">
             <ImageIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
@@ -76,7 +76,7 @@ export const ImageForm = ({
             <Image
               alt="Upload"
               fill
-              className="object-cover rounded-md"
+              className="object-cover rounded-xl"
               src={initialData.imageUrl}
             />
           </div>
