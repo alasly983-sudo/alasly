@@ -1,8 +1,21 @@
+@import "~@uploadthing/react/styles.css";
+
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+@layer base {
+  :root {
     --canvas: #e8e4dc;
     --background: #f7f5f0;
     --foreground: #13243a;
+    --surface: #ffffff;
     --card: #f8f7f3;
     --card-foreground: #13243a;
     --popover: #ffffff;
@@ -21,12 +34,13 @@
     --input: #d7d1c4;
     --ring: #0e6e62;
     --radius: 0.75rem;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
+  }
+
+  .dark {
     --canvas: #05090f;
     --background: #0a1521;
     --foreground: #eaf1f8;
+    --surface: #0f1e2e;
     --card: #15273a;
     --card-foreground: #eaf1f8;
     --popover: #0f1e2e;
@@ -44,33 +58,17 @@
     --border: #1e3346;
     --input: #2b4458;
     --ring: #2fb6a4;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
   }
-}
- 
-@layer base {
+
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground antialiased font-body;
-    background-image: linear-gradient(135deg, var(--background), var(--surface, #ffffff));
+    background-image: linear-gradient(135deg, var(--background), var(--surface));
   }
+
   h1,
   h2,
   h3,
@@ -84,5 +82,3 @@
 .ql-container {
   font-size: 16px !important;
 }
-
-@import "~@uploadthing/react/styles.css"
