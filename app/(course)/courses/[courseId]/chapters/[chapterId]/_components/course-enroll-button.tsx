@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 
 interface CourseEnrollButtonProps {
-  price: number;
+  price?: number | null;
   courseId: string;
 }
 
@@ -39,7 +39,7 @@ export const CourseEnrollButton = ({
       size="sm"
       className="w-full md:w-auto"
     >
-      التسجيل مقابل {formatPrice(price)}
+      التسجيل مقابل {price == null ? "مجانًا" : formatPrice(price)}
     </Button>
   )
 }

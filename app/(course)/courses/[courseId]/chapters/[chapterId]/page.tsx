@@ -39,9 +39,9 @@ const ChapterIdPage = async ({
     return redirect("/")
   }
 
-
   const isLocked = !chapter.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
+  const chapterTitle = chapter.title || "فصل بدون عنوان";
 
   return ( 
     <div>
@@ -61,10 +61,10 @@ const ChapterIdPage = async ({
         <div className="p-4">
           <VideoPlayer
             chapterId={params.chapterId}
-            title={chapter.title}
+            title={chapterTitle}
             courseId={params.courseId}
             nextChapterId={nextChapter?.id}
-            videoUrl={chapter.videoUrl!}
+            videoUrl={chapter.videoUrl}
             isLocked={isLocked}
             completeOnEnd={completeOnEnd}
           />
@@ -72,7 +72,7 @@ const ChapterIdPage = async ({
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">
-              {chapter.title}
+              {chapterTitle}
             </h2>
             {purchase ? (
               <CourseProgressButton
@@ -84,19 +84,25 @@ const ChapterIdPage = async ({
             ) : (
               <CourseEnrollButton
                 courseId={params.courseId}
-                price={course.price!}
+                price={course.price}
               />
             )}
           </div>
           <Separator />
           <div>
-            <Preview value={chapter.description!} />
+            {chapter.description ? (
+              <Preview value={chapter.description} />
+            ) : (
+              <p className="p-4 text-sm text-codeup-muted">
+                لا يوجد وصف لهذا الفصل بعد.
+              </p>
+            )}
           </div>
-          {!!attachments.length && (
+          {!!attachments?.length && (
             <>
               <Separator />
               <div className="p-4">
-                {attachments.map((attachment) => (
+                {attachments?.map((attachment) => (
                   <a 
                     href={attachment.url}
                     target="_blank"

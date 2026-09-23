@@ -1,8 +1,12 @@
 "use client";
 
-import { Lock } from "lucide-react";
+import { Lock, Video } from "lucide-react";
 
-const getYouTubeVideoId = (url: string) => {
+const getYouTubeVideoId = (url?: string | null) => {
+  if (!url) {
+    return null;
+  }
+
   try {
     const parsedUrl = new URL(url);
 
@@ -28,7 +32,7 @@ const getYouTubeVideoId = (url: string) => {
 };
 
 interface VideoPlayerProps {
-  videoUrl: string;
+  videoUrl?: string | null;
   courseId: string;
   chapterId: string;
   nextChapterId?: string;
@@ -66,6 +70,12 @@ export const VideoPlayer = ({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
+      )}
+      {!isLocked && !videoId && (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-y-3 rounded-2xl bg-codeup-soft text-center text-codeup-strong">
+          <Video className="h-10 w-10" aria-hidden="true" />
+          <p className="text-sm">لا يوجد فيديو لهذا الفصل بعد.</p>
+        </div>
       )}
     </div>
   )
