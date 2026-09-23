@@ -1,9 +1,8 @@
-# Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
+# Build an LMS Platform: Next.js 13, React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
 
 ![Copy of Copy of Copy of Copy of Fullstack Twitter Clone (9)](https://github.com/AntonioErdeljac/next13-lms-platform/assets/23248726/fa077fca-bb74-419a-84de-54ac103bb026)
 
-
-This is a repository for Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
+This is a repository for Build an LMS Platform: Next.js 13, React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
 
 [VIDEO TUTORIAL](https://www.youtube.com/watch?v=Big_aFLmekI)
 
@@ -44,7 +43,6 @@ npm i
 
 ### Setup .env file
 
-
 ```js
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
@@ -57,9 +55,6 @@ DATABASE_URL=
 
 UPLOADTHING_SECRET=
 UPLOADTHING_APP_ID=
-
-MUX_TOKEN_ID=
-MUX_TOKEN_SECRET=
 
 STRIPE_API_KEY=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -88,6 +83,6 @@ npm run dev
 
 Running commands with npm `npm run [command]`
 
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
+| command | description                              |
+| :------ | :--------------------------------------- |
+| `dev`   | Starts a development instance of the app |

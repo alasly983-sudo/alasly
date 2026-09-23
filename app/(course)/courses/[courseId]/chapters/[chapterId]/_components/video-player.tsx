@@ -1,17 +1,34 @@
 "use client";
 
-import axios from "axios";
-import MuxPlayer from "@mux/mux-player-react";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import { Loader2, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { useConfettiStore } from "@/hooks/use-confetti-store";
+const getYouTubeVideoId = (url: string) => {
+  try {
+    const parsedUrl = new URL(url);
+
+    if (parsedUrl.hostname === "youtu.be") {
+      return parsedUrl.pathname.slice(1);
+    }
+
+    if (parsedUrl.hostname.endsWith("youtube.com")) {
+      if (parsedUrl.pathname === "/watch") {
+        return parsedUrl.searchParams.get("v");
+      }
+
+      const pathParts = parsedUrl.pathname.split("/");
+      if (["embed", "shorts"].includes(pathParts[1])) {
+        return pathParts[2] || null;
+      }
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+};
 
 interface VideoPlayerProps {
-  playbackId: string;
+  videoUrl: string;
   courseId: string;
   chapterId: string;
   nextChapterId?: string;
@@ -21,7 +38,7 @@ interface VideoPlayerProps {
 };
 
 export const VideoPlayer = ({
-  playbackId,
+  videoUrl,
   courseId,
   chapterId,
   nextChapterId,
@@ -29,40 +46,10 @@ export const VideoPlayer = ({
   completeOnEnd,
   title,
 }: VideoPlayerProps) => {
-  const [isReady, setIsReady] = useState(false);
-  const router = useRouter();
-  const confetti = useConfettiStore();
-
-  const onEnd = async () => {
-    try {
-      if (completeOnEnd) {
-        await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
-          isCompleted: true,
-        });
-
-        if (!nextChapterId) {
-          confetti.onOpen();
-        }
-
-        toast.success("Progress updated");
-        router.refresh();
-
-        if (nextChapterId) {
-          router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
-        }
-      }
-    } catch {
-      toast.error("Something went wrong");
-    }
-  }
+  const videoId = getYouTubeVideoId(videoUrl);
 
   return (
     <div className="relative aspect-video">
-      {!isReady && !isLocked && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
-          <Loader2 className="h-8 w-8 animate-spin text-secondary" />
-        </div>
-      )}
       {isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800 flex-col gap-y-2 text-secondary">
           <Lock className="h-8 w-8" />
@@ -71,16 +58,13 @@ export const VideoPlayer = ({
           </p>
         </div>
       )}
-      {!isLocked && (
-        <MuxPlayer
+      {!isLocked && videoId && (
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}`}
           title={title}
-          className={cn(
-            !isReady && "hidden"
-          )}
-          onCanPlay={() => setIsReady(true)}
-          onEnded={onEnd}
-          autoPlay
-          playbackId={playbackId}
+          className="w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
         />
       )}
     </div>

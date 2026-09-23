@@ -2,25 +2,23 @@
 
 import * as z from "zod";
 import axios from "axios";
-import MuxPlayer from "@mux/mux-player-react";
 import { Pencil, PlusCircle, Video } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Chapter, MuxData } from "@prisma/client";
-import Image from "next/image";
+import { Chapter } from "@prisma/client";
 
 import { Button } from "@/components/ui/button";
-import { FileUpload } from "@/components/file-upload";
+import { Input } from "@/components/ui/input";
 
 interface ChapterVideoFormProps {
-  initialData: Chapter & { muxData?: MuxData | null };
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 };
 
 const formSchema = z.object({
-  videoUrl: z.string().min(1),
+  videoUrl: z.string().url().min(1),
 });
 
 export const ChapterVideoForm = ({
@@ -29,6 +27,7 @@ export const ChapterVideoForm = ({
   chapterId,
 }: ChapterVideoFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [videoUrl, setVideoUrl] = useState(initialData.videoUrl || "");
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -74,30 +73,37 @@ export const ChapterVideoForm = ({
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <MuxPlayer
-              playbackId={initialData?.muxData?.playbackId || ""}
+            <iframe
+              src={initialData.videoUrl}
+              title={initialData.title}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
             />
           </div>
         )
       )}
       {isEditing && (
-        <div>
-          <FileUpload
-            endpoint="chapterVideo"
-            onChange={(url) => {
-              if (url) {
-                onSubmit({ videoUrl: url });
-              }
-            }}
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit({ videoUrl });
+        }}>
+          <Input
+            value={videoUrl}
+            onChange={(event) => setVideoUrl(event.target.value)}
+            placeholder="https://www.youtube.com/watch?v=..."
           />
+          <Button type="submit" className="mt-4">
+            Save video
+          </Button>
           <div className="text-xs text-muted-foreground mt-4">
-           Upload this chapter&apos;s video
+           Paste a YouTube URL for this chapter&apos;s video
           </div>
-        </div>
+        </form>
       )}
       {initialData.videoUrl && !isEditing && (
         <div className="text-xs text-muted-foreground mt-2">
-          Videos can take a few minutes to process. Refresh the page if video does not appear.
+          Paste a different YouTube URL by selecting Edit video.
         </div>
       )}
     </div>
