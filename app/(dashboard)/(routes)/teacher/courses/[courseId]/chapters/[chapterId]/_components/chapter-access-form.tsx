@@ -57,25 +57,25 @@ export const ChapterAccessForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
-      toast.success("Chapter updated");
+      toast.success("تم تحديث الفصل");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Chapter access
+        الوصول إلى الفصل
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>إلغاء</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit access
+              <Pencil className="h-4 w-4 ml-2" />
+              تعديل الوصول
             </>
           )}
         </Button>
@@ -86,9 +86,9 @@ export const ChapterAccessForm = ({
           !initialData.isFree && "text-slate-500 italic"
         )}>
           {initialData.isFree ? (
-            <>This chapter is free for preview.</>
+            <>هذا الفصل متاح مجانًا للمعاينة.</>
           ) : (
-            <>This chapter is not free.</>
+            <>هذا الفصل غير مجاني.</>
           )}
         </p>
       )}
@@ -102,7 +102,7 @@ export const ChapterAccessForm = ({
               control={form.control}
               name="isFree"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormItem className="flex flex-row items-start gap-x-3 space-y-0 rounded-xl border p-4">
                   <FormControl>
                     <Checkbox
                       checked={field.value}
@@ -111,7 +111,7 @@ export const ChapterAccessForm = ({
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormDescription>
-                      Check this box if you want to make this chapter free for preview
+                      فعّل هذا الخيار لجعل الفصل مجانيًا للمعاينة
                     </FormDescription>
                   </div>
                 </FormItem>
@@ -122,7 +122,7 @@ export const ChapterAccessForm = ({
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
-                Save
+                حفظ
               </Button>
             </div>
           </form>

@@ -28,6 +28,16 @@ const iconMap: Record<Category["name"], IconType> = {
   "Engineering": FcEngineering,
 };
 
+const labelMap: Record<Category["name"], string> = {
+  "Music": "الموسيقى",
+  "Photography": "التصوير الفوتوغرافي",
+  "Fitness": "اللياقة البدنية",
+  "Accounting": "المحاسبة",
+  "Computer Science": "علوم الحاسب",
+  "Filming": "صناعة الأفلام",
+  "Engineering": "الهندسة",
+};
+
 export const Categories = ({
   items,
 }: CategoriesProps) => {
@@ -36,7 +46,7 @@ export const Categories = ({
       {items.map((item) => (
         <CategoryItem
           key={item.id}
-          label={item.name}
+          label={labelMap[item.name] || item.name}
           icon={iconMap[item.name]}
           value={item.id}
         />

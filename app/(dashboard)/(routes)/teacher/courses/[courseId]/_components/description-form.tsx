@@ -28,7 +28,7 @@ interface DescriptionFormProps {
 
 const formSchema = z.object({
   description: z.string().min(1, {
-    message: "Description is required",
+    message: "الوصف مطلوب",
   }),
 });
 
@@ -54,25 +54,25 @@ export const DescriptionForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("Course updated");
+      toast.success("تم تحديث الدورة");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Course description
+        وصف الدورة
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>إلغاء</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit description
+              <Pencil className="h-4 w-4 ml-2" />
+              تعديل الوصف
             </>
           )}
         </Button>
@@ -82,7 +82,7 @@ export const DescriptionForm = ({
           "text-sm mt-2",
           !initialData.description && "text-slate-500 italic"
         )}>
-          {initialData.description || "No description"}
+          {initialData.description || "لا يوجد وصف"}
         </p>
       )}
       {isEditing && (
@@ -99,7 +99,7 @@ export const DescriptionForm = ({
                   <FormControl>
                     <Textarea
                       disabled={isSubmitting}
-                      placeholder="e.g. 'This course is about...'"
+                      placeholder="مثال: تتحدث هذه الدورة عن..."
                       {...field}
                     />
                   </FormControl>
@@ -112,7 +112,7 @@ export const DescriptionForm = ({
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
-                Save
+                حفظ
               </Button>
             </div>
           </form>

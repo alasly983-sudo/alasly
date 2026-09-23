@@ -75,7 +75,7 @@ export const ChaptersList = ({
                 {(provided) => (
                   <div
                     className={cn(
-                      "flex items-center gap-x-2 bg-slate-200 border-slate-200 border text-slate-700 rounded-md mb-4 text-sm",
+                      "flex items-center gap-x-2 bg-slate-200 border-slate-200 border text-slate-700 rounded-xl mb-4 text-sm shadow-sm",
                       chapter.isPublished && "bg-sky-100 border-sky-200 text-sky-700"
                     )}
                     ref={provided.innerRef}
@@ -83,8 +83,8 @@ export const ChaptersList = ({
                   >
                     <div
                       className={cn(
-                        "px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition",
-                        chapter.isPublished && "border-r-sky-200 hover:bg-sky-200"
+                        "px-2 py-3 border-l border-l-slate-200 hover:bg-slate-300 rounded-r-xl transition",
+                        chapter.isPublished && "border-l-sky-200 hover:bg-sky-200"
                       )}
                       {...provided.dragHandleProps}
                     >
@@ -93,10 +93,10 @@ export const ChaptersList = ({
                       />
                     </div>
                     {chapter.title}
-                    <div className="ml-auto pr-2 flex items-center gap-x-2">
+                    <div className="mr-auto pl-2 flex items-center gap-x-2">
                       {chapter.isFree && (
                         <Badge>
-                          Free
+                          مجاني
                         </Badge>
                       )}
                       <Badge
@@ -105,7 +105,7 @@ export const ChaptersList = ({
                           chapter.isPublished && "bg-sky-700"
                         )}
                       >
-                        {chapter.isPublished ? "Published" : "Draft"}
+                        {chapter.isPublished ? "منشور" : "مسودة"}
                       </Badge>
                       <Pencil
                         onClick={() => onEdit(chapter.id)}

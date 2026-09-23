@@ -26,7 +26,7 @@ export const CourseEnrollButton = ({
 
       window.location.assign(response.data.url);
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setIsLoading(false);
     }
@@ -39,7 +39,7 @@ export const CourseEnrollButton = ({
       size="sm"
       className="w-full md:w-auto"
     >
-      Enroll for {formatPrice(price)}
+      التسجيل مقابل {formatPrice(price)}
     </Button>
   )
 }

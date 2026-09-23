@@ -31,15 +31,15 @@ export const ChapterActions = ({
 
       if (isPublished) {
         await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/unpublish`);
-        toast.success("Chapter unpublished");
+        toast.success("تم إلغاء نشر الفصل");
       } else {
         await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/publish`);
-        toast.success("Chapter published");
+        toast.success("تم نشر الفصل");
       }
 
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setIsLoading(false);
     }
@@ -51,11 +51,11 @@ export const ChapterActions = ({
 
       await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
 
-      toast.success("Chapter deleted");
+      toast.success("تم حذف الفصل");
       router.refresh();
       router.push(`/teacher/courses/${courseId}`);
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +69,7 @@ export const ChapterActions = ({
         variant="outline"
         size="sm"
       >
-        {isPublished ? "Unpublish" : "Publish"}
+        {isPublished ? "إلغاء النشر" : "نشر"}
       </Button>
       <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>

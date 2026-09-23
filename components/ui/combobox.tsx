@@ -42,14 +42,14 @@ export const Combobox = ({
         >
           {value
             ? options.find((option) => option.value === value)?.label
-            : "Select option..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            : "اختر خيارًا..."}
+          <ChevronsUpDown className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search option..." />
-          <CommandEmpty>No option found.</CommandEmpty>
+          <CommandInput placeholder="ابحث عن خيار..." />
+          <CommandEmpty>لم يتم العثور على خيار.</CommandEmpty>
           <CommandGroup>
             {options.map((option) => (
               <CommandItem
@@ -61,7 +61,7 @@ export const Combobox = ({
               >
                 <Check
                   className={cn(
-                    "mr-2 h-4 w-4",
+                    "ml-2 h-4 w-4",
                     value === option.value ? "opacity-100" : "opacity-0"
                   )}
                 />

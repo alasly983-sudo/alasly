@@ -48,13 +48,13 @@ const ChapterIdPage = async ({
       {userProgress?.isCompleted && (
         <Banner
           variant="success"
-          label="You already completed this chapter."
+          label="لقد أكملت هذا الفصل بالفعل."
         />
       )}
       {isLocked && (
         <Banner
           variant="warning"
-          label="You need to purchase this course to watch this chapter."
+          label="يجب شراء هذه الدورة لمشاهدة هذا الفصل."
         />
       )}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">

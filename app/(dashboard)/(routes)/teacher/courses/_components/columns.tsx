@@ -24,8 +24,8 @@ export const columns: ColumnDef<Course>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Title
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          العنوان
+          <ArrowUpDown className="mr-2 h-4 w-4" />
         </Button>
       )
     },
@@ -38,14 +38,14 @@ export const columns: ColumnDef<Course>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Price
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          السعر
+          <ArrowUpDown className="mr-2 h-4 w-4" />
         </Button>
       )
     },
     cell: ({ row }) => {
       const price = parseFloat(row.getValue("price") || "0");
-      const formatted = new Intl.NumberFormat("en-US", {
+      const formatted = new Intl.NumberFormat("ar-SA", {
         style: "currency",
         currency: "USD"
       }).format(price);
@@ -61,8 +61,8 @@ export const columns: ColumnDef<Course>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Published
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          منشورة
+          <ArrowUpDown className="mr-2 h-4 w-4" />
         </Button>
       )
     },
@@ -74,7 +74,7 @@ export const columns: ColumnDef<Course>[] = [
           "bg-slate-500",
           isPublished && "bg-sky-700"
         )}>
-          {isPublished ? "Published" : "Draft"}
+          {isPublished ? "منشورة" : "مسودة"}
         </Badge>
       )
     }
@@ -88,15 +88,15 @@ export const columns: ColumnDef<Course>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-4 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">فتح القائمة</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <Link href={`/teacher/courses/${id}`}>
               <DropdownMenuItem>
-                <Pencil className="h-4 w-4 mr-2" />
-                Edit
+                <Pencil className="h-4 w-4 ml-2" />
+                تعديل
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>

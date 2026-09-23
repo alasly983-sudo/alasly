@@ -55,27 +55,27 @@ export const CategoryForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("Course updated");
+      toast.success("تم تحديث الدورة");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   const selectedOption = options.find((option) => option.value === initialData.categoryId);
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Course category
+        تصنيف الدورة
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>إلغاء</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit category
+              <Pencil className="h-4 w-4 ml-2" />
+              تعديل التصنيف
             </>
           )}
         </Button>
@@ -85,7 +85,7 @@ export const CategoryForm = ({
           "text-sm mt-2",
           !initialData.categoryId && "text-slate-500 italic"
         )}>
-          {selectedOption?.label || "No category"}
+          {selectedOption?.label || "لا يوجد تصنيف"}
         </p>
       )}
       {isEditing && (
@@ -114,7 +114,7 @@ export const CategoryForm = ({
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
-                Save
+                حفظ
               </Button>
             </div>
           </form>

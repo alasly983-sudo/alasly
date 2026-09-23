@@ -53,25 +53,25 @@ export const PriceForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("Course updated");
+      toast.success("تم تحديث الدورة");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Course price
+        سعر الدورة
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>إلغاء</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit price
+              <Pencil className="h-4 w-4 ml-2" />
+              تعديل السعر
             </>
           )}
         </Button>
@@ -83,7 +83,7 @@ export const PriceForm = ({
         )}>
           {initialData.price
             ? formatPrice(initialData.price)
-            : "No price"
+            : "لا يوجد سعر"
           }
         </p>
       )}
@@ -103,7 +103,7 @@ export const PriceForm = ({
                       type="number"
                       step="0.01"
                       disabled={isSubmitting}
-                      placeholder="Set a price for your course"
+                      placeholder="حدد سعر الدورة"
                       {...field}
                     />
                   </FormControl>
@@ -116,7 +116,7 @@ export const PriceForm = ({
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
-                Save
+                حفظ
               </Button>
             </div>
           </form>

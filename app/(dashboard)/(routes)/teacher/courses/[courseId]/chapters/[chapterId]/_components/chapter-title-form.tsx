@@ -52,25 +52,25 @@ export const ChapterTitleForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
-      toast.success("Chapter updated");
+      toast.success("تم تحديث الفصل");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Chapter title
+        عنوان الفصل
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>إلغاء</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit title
+              <Pencil className="h-4 w-4 ml-2" />
+              تعديل العنوان
             </>
           )}
         </Button>
@@ -94,7 +94,7 @@ export const ChapterTitleForm = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
+                      placeholder="مثال: مقدمة إلى الدورة"
                       {...field}
                     />
                   </FormControl>
@@ -107,7 +107,7 @@ export const ChapterTitleForm = ({
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
-                Save
+                حفظ
               </Button>
             </div>
           </form>

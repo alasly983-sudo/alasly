@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   title: z.string().min(1, {
-    message: "Title is required",
+    message: "العنوان مطلوب",
   }),
 });
 
@@ -41,20 +41,20 @@ const CreatePage = () => {
     try {
       const response = await axios.post("/api/courses", values);
       router.push(`/teacher/courses/${response.data.id}`);
-      toast.success("Course created");
+      toast.success("تم إنشاء الدورة");
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   return ( 
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
       <div>
-        <h1 className="text-2xl">
-          Name your course
+        <h1 className="text-2xl font-semibold">
+          سمِّ دورتك
         </h1>
         <p className="text-sm text-slate-600">
-          What would you like to name your course? Don&apos;t worry, you can change this later.
+          ما الاسم الذي تريده لدورتك؟ لا تقلق، يمكنك تغييره لاحقًا.
         </p>
         <Form {...form}>
           <form
@@ -67,17 +67,17 @@ const CreatePage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Course title
+                    عنوان الدورة
                   </FormLabel>
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Advanced web development'"
+                      placeholder="مثال: تطوير الويب المتقدم"
                       {...field}
                     />
                   </FormControl>
                   <FormDescription>
-                    What will you teach in this course?
+                    ماذا ستعلّم في هذه الدورة؟
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -89,14 +89,14 @@ const CreatePage = () => {
                   type="button"
                   variant="ghost"
                 >
-                  Cancel
+                  إلغاء
                 </Button>
               </Link>
               <Button
                 type="submit"
                 disabled={!isValid || isSubmitting}
               >
-                Continue
+                متابعة
               </Button>
             </div>
           </form>

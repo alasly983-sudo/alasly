@@ -35,11 +35,11 @@ export const AttachmentForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post(`/api/courses/${courseId}/attachments`, values);
-      toast.success("Course updated");
+      toast.success("تم تحديث الدورة");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   };
 
@@ -47,27 +47,27 @@ export const AttachmentForm = ({
     try {
       setDeletingId(id);
       await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
-      toast.success("Attachment deleted");
+      toast.success("تم حذف المرفق");
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setDeletingId(null);
     }
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Course attachments
+        مرفقات الدورة
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing && (
-            <>Cancel</>
+            <>إلغاء</>
           )}
           {!isEditing && (
             <>
-              <PlusCircle className="h-4 w-4 mr-2" />
-              Add a file
+              <PlusCircle className="h-4 w-4 ml-2" />
+              إضافة ملف
             </>
           )}
         </Button>
@@ -76,7 +76,7 @@ export const AttachmentForm = ({
         <>
           {initialData.attachments.length === 0 && (
             <p className="text-sm mt-2 text-slate-500 italic">
-              No attachments yet
+              لا توجد مرفقات بعد
             </p>
           )}
           {initialData.attachments.length > 0 && (
@@ -86,7 +86,7 @@ export const AttachmentForm = ({
                   key={attachment.id}
                   className="flex items-center p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md"
                 >
-                  <File className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <File className="h-4 w-4 ml-2 flex-shrink-0" />
                   <p className="text-xs line-clamp-1">
                     {attachment.name}
                   </p>
@@ -98,7 +98,7 @@ export const AttachmentForm = ({
                   {deletingId !== attachment.id && (
                     <button
                       onClick={() => onDelete(attachment.id)}
-                      className="ml-auto hover:opacity-75 transition"
+                      className="mr-auto hover:opacity-75 transition"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -120,7 +120,7 @@ export const AttachmentForm = ({
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            Add anything your students might need to complete the course.
+            أضف أي ملفات يحتاجها طلابك لإكمال الدورة.
           </div>
         </div>
       )}

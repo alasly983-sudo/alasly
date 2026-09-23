@@ -36,32 +36,32 @@ export const ChapterVideoForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
-      toast.success("Chapter updated");
+      toast.success("تم تحديث الفصل");
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       <div className="font-medium flex items-center justify-between">
-        Chapter video
+        فيديو الفصل
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing && (
-            <>Cancel</>
+            <>إلغاء</>
           )}
           {!isEditing && !initialData.videoUrl && (
             <>
-              <PlusCircle className="h-4 w-4 mr-2" />
-              Add a video
+              <PlusCircle className="h-4 w-4 ml-2" />
+              إضافة فيديو
             </>
           )}
           {!isEditing && initialData.videoUrl && (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
-              Edit video
+              <Pencil className="h-4 w-4 ml-2" />
+              تعديل الفيديو
             </>
           )}
         </Button>
@@ -94,16 +94,16 @@ export const ChapterVideoForm = ({
             placeholder="https://www.youtube.com/watch?v=..."
           />
           <Button type="submit" className="mt-4">
-            Save video
+            حفظ الفيديو
           </Button>
           <div className="text-xs text-muted-foreground mt-4">
-           Paste a YouTube URL for this chapter&apos;s video
+           الصق رابط YouTube لفيديو هذا الفصل
           </div>
         </form>
       )}
       {initialData.videoUrl && !isEditing && (
         <div className="text-xs text-muted-foreground mt-2">
-          Paste a different YouTube URL by selecting Edit video.
+          الصق رابط YouTube آخر عبر اختيار تعديل الفيديو.
         </div>
       )}
     </div>

@@ -20,16 +20,16 @@ export default async function Dashboard() {
   } = await getDashboardCourses(userId);
 
   return (
-    <div className="p-6 space-y-4">
+    <div className="p-6 space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
        <InfoCard
           icon={Clock}
-          label="In Progress"
+          label="قيد التقدم"
           numberOfItems={coursesInProgress.length}
        />
        <InfoCard
           icon={CheckCircle}
-          label="Completed"
+          label="مكتملة"
           numberOfItems={completedCourses.length}
           variant="success"
        />

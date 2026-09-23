@@ -57,11 +57,11 @@ export const ChaptersForm = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post(`/api/courses/${courseId}/chapters`, values);
-      toast.success("Chapter created");
+      toast.success("تم إنشاء الفصل");
       toggleCreating();
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     }
   }
 
@@ -72,10 +72,10 @@ export const ChaptersForm = ({
       await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
         list: updateData
       });
-      toast.success("Chapters reordered");
+      toast.success("تم إعادة ترتيب الفصول");
       router.refresh();
     } catch {
-      toast.error("Something went wrong");
+      toast.error("حدث خطأ ما");
     } finally {
       setIsUpdating(false);
     }
@@ -86,21 +86,21 @@ export const ChaptersForm = ({
   }
 
   return (
-    <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="relative mt-6 border bg-white rounded-2xl p-5 shadow-sm">
       {isUpdating && (
         <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-m flex items-center justify-center">
           <Loader2 className="animate-spin h-6 w-6 text-sky-700" />
         </div>
       )}
       <div className="font-medium flex items-center justify-between">
-        Course chapters
+        فصول الدورة
         <Button onClick={toggleCreating} variant="ghost">
           {isCreating ? (
-            <>Cancel</>
+            <>إلغاء</>
           ) : (
             <>
-              <PlusCircle className="h-4 w-4 mr-2" />
-              Add a chapter
+              <PlusCircle className="h-4 w-4 ml-2" />
+              إضافة فصل
             </>
           )}
         </Button>
@@ -119,7 +119,7 @@ export const ChaptersForm = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to the course'"
+                      placeholder="مثال: مقدمة إلى الدورة"
                       {...field}
                     />
                   </FormControl>
@@ -131,7 +131,7 @@ export const ChaptersForm = ({
               disabled={!isValid || isSubmitting}
               type="submit"
             >
-              Create
+              إنشاء
             </Button>
           </form>
         </Form>
@@ -141,7 +141,7 @@ export const ChaptersForm = ({
           "text-sm mt-2",
           !initialData.chapters.length && "text-slate-500 italic"
         )}>
-          {!initialData.chapters.length && "No chapters"}
+          {!initialData.chapters.length && "لا توجد فصول"}
           <ChaptersList
             onEdit={onEdit}
             onReorder={onReorder}
@@ -151,7 +151,7 @@ export const ChaptersForm = ({
       )}
       {!isCreating && (
         <p className="text-xs text-muted-foreground mt-4">
-          Drag and drop to reorder the chapters
+          اسحب وأفلت لإعادة ترتيب الفصول
         </p>
       )}
     </div>
