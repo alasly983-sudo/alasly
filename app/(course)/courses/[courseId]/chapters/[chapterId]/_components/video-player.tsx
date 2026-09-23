@@ -83,8 +83,8 @@ export const VideoPlayer = ({
             onContextMenu={(event) => event.preventDefault()}
           />
           <div
+            className="absolute top-0 left-0 w-full h-20 z-50 bg-transparent pointer-events-auto"
             aria-hidden="true"
-            className="pointer-events-auto absolute inset-x-0 top-0 z-10 h-1/5"
           />
         </>
       )}
