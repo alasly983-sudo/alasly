@@ -51,18 +51,11 @@ export const VideoPlayer = ({
   title,
 }: VideoPlayerProps) => {
   const videoId = getYouTubeVideoId(videoUrl);
-  const youtubeParams = new URLSearchParams({
-    modestbranding: "1",
-    rel: "0",
-    showinfo: "0",
-    controls: "1",
-    disablekb: "1",
-  });
 
   return (
     <div
-      className="relative aspect-video"
-      onContextMenu={(event) => event.preventDefault()}
+      className="relative aspect-video w-full"
+      onContextMenu={(e) => e.preventDefault()}
     >
       {isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-codeup-ink flex-col gap-y-2 text-white">
@@ -74,17 +67,16 @@ export const VideoPlayer = ({
       )}
       {!isLocked && videoId && (
         <>
+          <div
+            className="absolute top-0 left-0 w-full h-24 z-50 bg-transparent"
+            title="Protected Video"
+          />
           <iframe
-            src={`https://www.youtube.com/embed/${videoId}?${youtubeParams.toString()}`}
+            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0`}
             title={title}
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            onContextMenu={(event) => event.preventDefault()}
-          />
-          <div
-            className="absolute top-0 left-0 w-full h-20 z-50 bg-transparent pointer-events-auto"
-            aria-hidden="true"
           />
         </>
       )}
