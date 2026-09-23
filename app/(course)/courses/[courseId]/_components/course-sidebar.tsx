@@ -34,6 +34,7 @@ export const CourseSidebar = async ({
       }
     }
   });
+  const hasAccess = !!purchase || course.price == null || course.price <= 0;
 
   return (
     <div className="h-full border-l flex flex-col overflow-y-auto shadow-codeup bg-codeup-surface/95">
@@ -41,7 +42,7 @@ export const CourseSidebar = async ({
         <h1 className="font-semibold">
           {course.title}
         </h1>
-        {purchase && (
+        {hasAccess && (
           <div className="mt-10">
             <CourseProgress
               variant="success"
@@ -58,7 +59,7 @@ export const CourseSidebar = async ({
             label={chapter.title}
             isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
             courseId={course.id}
-            isLocked={!chapter.isFree && !purchase}
+            isLocked={!chapter.isFree && !hasAccess}
           />
         ))}
       </div>

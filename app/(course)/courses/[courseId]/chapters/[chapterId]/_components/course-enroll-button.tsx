@@ -10,11 +10,13 @@ import { formatPrice } from "@/lib/format";
 interface CourseEnrollButtonProps {
   price?: number | null;
   courseId: string;
+  isFree?: boolean;
 }
 
 export const CourseEnrollButton = ({
   price,
   courseId,
+  isFree = price == null || price <= 0,
 }: CourseEnrollButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +41,7 @@ export const CourseEnrollButton = ({
       size="sm"
       className="w-full md:w-auto"
     >
-      التسجيل مقابل {price == null ? "مجانًا" : formatPrice(price)}
+      {isFree ? "ابدأ الدورة مجانًا" : `التسجيل مقابل ${formatPrice(price ?? 0)}`}
     </Button>
   )
 }

@@ -40,6 +40,26 @@ export async function POST(
       return new NextResponse("Not found", { status: 404 });
     }
 
+    if (course.price == null || course.price <= 0) {
+      await db.purchase.upsert({
+        where: {
+          userId_courseId: {
+            userId: user.id,
+            courseId: course.id,
+          }
+        },
+        update: {},
+        create: {
+          userId: user.id,
+          courseId: course.id,
+        }
+      });
+
+      return NextResponse.json({
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}`,
+      });
+    }
+
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
       {
         quantity: 1,
