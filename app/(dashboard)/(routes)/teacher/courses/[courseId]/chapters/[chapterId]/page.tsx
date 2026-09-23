@@ -35,19 +35,6 @@ const ChapterIdPage = async ({
     return redirect("/")
   }
 
-  const requiredFields = [
-    chapter.title,
-    chapter.description,
-    chapter.videoUrl,
-  ];
-
-  const totalFields = requiredFields.length;
-  const completedFields = requiredFields.filter(Boolean).length;
-
-  const completionText = `(${completedFields}/${totalFields})`;
-
-  const isComplete = requiredFields.every(Boolean);
-
   return (
     <>
       {!chapter.isPublished && (
@@ -71,12 +58,8 @@ const ChapterIdPage = async ({
                 <h1 className="text-2xl font-medium">
                   إنشاء الفصل
                 </h1>
-                <span className="text-sm text-slate-700">
-                  أكمل جميع الحقول {completionText}
-                </span>
               </div>
               <ChapterActions
-                disabled={!isComplete}
                 courseId={params.courseId}
                 chapterId={params.chapterId}
                 isPublished={chapter.isPublished}

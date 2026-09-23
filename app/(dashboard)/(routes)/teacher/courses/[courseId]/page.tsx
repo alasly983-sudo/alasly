@@ -55,22 +55,6 @@ const CourseIdPage = async ({
     return redirect("/");
   }
 
-  const requiredFields = [
-    course.title,
-    course.description,
-    course.imageUrl,
-    course.price,
-    course.categoryId,
-    course.chapters.some(chapter => chapter.isPublished),
-  ];
-
-  const totalFields = requiredFields.length;
-  const completedFields = requiredFields.filter(Boolean).length;
-
-  const completionText = `(${completedFields}/${totalFields})`;
-
-  const isComplete = requiredFields.every(Boolean);
-
   return (
     <>
       {!course.isPublished && (
@@ -84,12 +68,8 @@ const CourseIdPage = async ({
             <h1 className="text-2xl font-medium">
               إعداد الدورة
             </h1>
-            <span className="text-sm text-slate-700">
-              أكمل جميع الحقول {completionText}
-            </span>
           </div>
           <Actions
-            disabled={!isComplete}
             courseId={params.courseId}
             isPublished={course.isPublished}
           />

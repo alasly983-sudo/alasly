@@ -19,19 +19,10 @@ export async function PATCH(
         id: params.courseId,
         userId,
       },
-      include: {
-        chapters: true,
-      },
     });
 
     if (!course) {
       return new NextResponse("Not found", { status: 404 });
-    }
-
-    const hasPublishedChapter = course.chapters.some((chapter) => chapter.isPublished);
-
-    if (!course.title || !course.description || !course.imageUrl || !course.categoryId || !hasPublishedChapter) {
-      return new NextResponse("Missing required fields", { status: 401 });
     }
 
     const publishedCourse = await db.course.update({

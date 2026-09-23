@@ -10,14 +10,12 @@ import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 interface ChapterActionsProps {
-  disabled: boolean;
   courseId: string;
   chapterId: string;
   isPublished: boolean;
 };
 
 export const ChapterActions = ({
-  disabled,
   courseId,
   chapterId,
   isPublished
@@ -65,7 +63,7 @@ export const ChapterActions = ({
     <div className="flex items-center gap-x-2">
       <Button
         onClick={onClick}
-        disabled={disabled || isLoading}
+        disabled={isLoading}
         variant="outline"
         size="sm"
       >

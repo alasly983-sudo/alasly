@@ -11,13 +11,11 @@ import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 
 interface ActionsProps {
-  disabled: boolean;
   courseId: string;
   isPublished: boolean;
 };
 
 export const Actions = ({
-  disabled,
   courseId,
   isPublished
 }: ActionsProps) => {
@@ -66,7 +64,7 @@ export const Actions = ({
     <div className="flex items-center gap-x-2">
       <Button
         onClick={onClick}
-        disabled={disabled || isLoading}
+        disabled={isLoading}
         variant="outline"
         size="sm"
       >
